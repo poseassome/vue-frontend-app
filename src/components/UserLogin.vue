@@ -10,14 +10,14 @@
       <p>
         <label for="userPw"
           >비밀번호
-          <input id="userPw" type="password" v-model='inputPw' data-test='userPW'>
+          <input id="userPw" type="password" v-model='inputPw' data-password>
         </label>
       </p>
       <button>LOGIN</button>
     </form>
     <div>
-    <p class='userID'>아이디 : {{inputId}}</p>
-    <p>비밀번호 : {{inputPw}}</p>
+    <p class='checkID'>아이디 : {{inputId}}</p>
+    <p class='checkPW'>비밀번호 : {{inputPw}}</p>
     </div>
   </div>
 </template>
