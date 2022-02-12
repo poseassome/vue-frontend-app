@@ -1,14 +1,17 @@
 <template>
   <UserLogin />
+  <MainNav />
 </template>
 
 <script>
 import UserLogin from './components/UserLogin.vue';
+import MainNav from './components/MainNav.vue';
 
 export default {
   name: 'App',
   components: {
     UserLogin,
+    MainNav,
   },
 };
 </script>
