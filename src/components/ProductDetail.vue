@@ -50,8 +50,7 @@
         </label>
       </p>
       <h2 class="optionbtn">퍼스널 옵션</h2>
-        <div class="flex justify-between"
-          v-for="personaloption in personaloptions" :key="personaloption.id">
+        <div class="flex justify-between">
           <h3 class="text-left">{{ personaloption.title }}</h3>
           <p class="font-bold">
             <button type="button" class="rounded-full bg-white border border-black-100 w-7 h-7 mr-2"
@@ -80,7 +79,7 @@
             </button>
           </p>
           <p class="font-bold text-2xl">
-            {{ totalcount.price }} 원
+            {{ TotalPrice }} 원
           </p>
        </div>
        <button type="button"
@@ -113,18 +112,22 @@ export default {
           price: 5500,
         },
       ],
-      personaloptions: [
-        {
-          title: '에스프레소 샷',
-          count: 1,
-          price: 600,
-        },
-      ],
+      personaloption: {
+        title: '에스프레소 샷',
+        count: 1,
+        price: 600,
+      },
       totalcount: {
         count: 1,
         price: this.$route.query.price,
       },
     };
+  },
+  computed: {
+    TotalPrice() {
+      const personaloptionPrice = this.personaloption.price * (this.personaloption.count - 1);
+      return (Number(this.totalcount.price) + personaloptionPrice) * this.totalcount.count;
+    },
   },
   methods: {
     back() {
