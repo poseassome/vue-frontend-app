@@ -8,3 +8,9 @@
 .userinput {
   @apply border px-1 py-1 rounded h-8 border-gray-300 mb-2;
 }
+.detailbtn {
+  @apply bg-sky-700 rounded-full w-8 h-8 leading-3
+}
+.optionbtn {
+  @apply text-lg text-left font-bold mt-5 mb-1
+}

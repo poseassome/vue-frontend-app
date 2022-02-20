@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul class="flex text-center items-center justify-around fixed bottom-0 w-full h-16
-    bg-gradient-to-t from-gray-300 to-transparent
+    bg-gradient-to-t from-gray-300 to-white
     border-t border-gray-300">
       <li>
       <i class="fa-solid fa-house"></i><br/>
