@@ -16,11 +16,13 @@
     <form>
       <p class="grid grid-cols-2 mt-5">
         <label for="temp"
-        class="block rounded-l-full bg-white border border-black-100 h-10 leading-10">HOT
+        class="block rounded-l-full bg-white border border-black-100 h-10 leading-10
+        hover:bg-red-700 hover:text-white">HOT
           <input type="radio" id="temp" name="temp" class="hidden">
         </label>
         <label for="temp"
-        class="block rounded-r-full bg-white border border-black-100 h-10 leading-10">ICE
+        class="block rounded-r-full bg-white border border-black-100 h-10 leading-10
+        hover:bg-sky-700 hover:text-white">ICE
           <input type="radio" id="temp" name="temp" class="hidden">
         </label>
       </p>
@@ -28,7 +30,8 @@
       <p class="grid grid-cols-4 gap-1">
         <label for="size"
         v-for="cupsize in cupsizes" :key="cupsize.id"
-        class="block h-20 bg-white border border-black-100 py-5 flex flex-col items-center">
+        class="block h-20 bg-white border border-black-100 py-5 flex flex-col items-center
+        hover:bg-sky-700 hover:text-white">
           <i class="fa-solid fa-mug-saucer"></i>
           {{ cupsize.size }}
           <input type="radio" id="size" name="size" class="hidden">
@@ -37,15 +40,18 @@
       <h2 class="optionbtn">컵 선택</h2>
       <p class="grid grid-cols-3">
         <label for="temp"
-        class="block rounded-l-full bg-white border border-black-100 h-10 leading-10">매장컵
+        class="block rounded-l-full bg-white border border-black-100 h-10 leading-10
+        hover:bg-sky-700 hover:text-white">매장컵
           <input type="radio" id="temp" name="temp" class="hidden">
         </label>
         <label for="temp"
-        class="block bg-white border border-black-100 h-10 leading-10">개인컵
+        class="block bg-white border border-black-100 h-10 leading-10
+        hover:bg-sky-700 hover:text-white">개인컵
           <input type="radio" id="temp" name="temp" class="hidden">
         </label>
         <label for="temp"
-        class="block rounded-r-full bg-white border border-black-100 h-10 leading-10">일회용컵
+        class="block rounded-r-full bg-white border border-black-100 h-10 leading-10
+        hover:bg-sky-700 hover:text-white">일회용컵
           <input type="radio" id="temp" name="temp" class="hidden">
         </label>
       </p>
