@@ -1,16 +1,14 @@
 <template>
-  <UserLogin />
+  <router-view />
   <MainNav />
 </template>
 
 <script>
-import UserLogin from './components/UserLogin.vue';
 import MainNav from './components/MainNav.vue';
 
 export default {
   name: 'App',
   components: {
-    UserLogin,
     MainNav,
   },
 };
@@ -23,6 +21,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
