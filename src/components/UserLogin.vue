@@ -22,9 +22,11 @@
     <p class='checkPW mb-2'>비밀번호 : {{inputPw}}</p>
     </div>
   </div>
+  <!--
   <router-link to='/products'>
     <button class="font-bold py-2 px-4 rounded text-white bg-sky-700 mt-10">음료 주문하기</button>
   </router-link>
+  -->
 </template>
 
 <script>
