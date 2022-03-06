@@ -2,40 +2,43 @@
   <div class="mt-40">
     <form>
       <p>
-        <label for="userId"
-          >
+        <label for="userId">
           <input id="userID" type="text" v-model='inputId' data-username placeholder="아이디"
           class="userinput">
         </label>
       </p>
       <p>
-        <label for="userPw"
-          >
+        <label for="userPw">
           <input id="userPw" type="password" v-model='inputPw' data-password placeholder="비밀번호"
           class="userinput">
         </label>
       </p>
-      <button class="btn mb-2">LOGIN</button>
+      <button type='button' class="btn mb-2" @click='userlogin()'>LOGIN</button>
     </form>
     <div>
     <p class='checkID mb-2'>아이디 : {{inputId}}</p>
     <p class='checkPW mb-2'>비밀번호 : {{inputPw}}</p>
     </div>
   </div>
-  <!--
-  <router-link to='/products'>
-    <button class="font-bold py-2 px-4 rounded text-white bg-sky-700 mt-10">음료 주문하기</button>
-  </router-link>
-  -->
 </template>
 
 <script>
 export default {
+  name: 'UserLogin',
+  emits: ['login'],
   data() {
     return {
       inputId: '',
       inputPw: '',
     };
+  },
+  methods: {
+    userlogin() {
+      this.$emit('login', {
+        inputId: this.inputId,
+        inputPw: this.inputPw,
+      });
+    },
   },
 };
 </script>
