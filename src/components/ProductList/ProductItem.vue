@@ -2,7 +2,9 @@
   <div id="productlist" class="container mx-auto mt-5" data-test="product-type">
     <h1 class="h-10 leading-10 text-2xl">에스프레소</h1>
     <ul class="px-5">
-      <li v-for="productmenu in productmenus" :key="productmenu.id" class="my-2">
+      <li v-for="productmenu in productmenus" :key="productmenu.id" class="my-2"
+      data-test="product-item">
+        <router-link to="/productorder">
         <div class="grid grid-cols-3">
             <p class="rounded-full overflow-hidden w-24 h-24">
               <img v-bind:src="productmenu.thumbnail" alt='음료 이미지'
@@ -19,6 +21,7 @@
               <p data-test="product-price">{{ comma(productmenu.price) }}원</p>
             </div>
         </div>
+        </router-link>
       </li>
     </ul>
   </div>
