@@ -21,7 +21,6 @@
 <script>
 export default {
   name: 'ProductDetail',
-  emits: ['comma'],
   props: {
     product: {
       type: Object,
@@ -36,43 +35,6 @@ export default {
       },
     },
   },
-  // data() {
-  //   return {
-  //     cupsizes: [
-  //       {
-  //         size: 'Short',
-  //         price: 4000,
-  //       },
-  //       {
-  //         size: 'Tall',
-  //         price: 4500,
-  //       },
-  //       {
-  //         size: 'Grande',
-  //         price: 5000,
-  //       },
-  //       {
-  //         size: 'Venti',
-  //         price: 5500,
-  //       },
-  //     ],
-  //     personaloption: {
-  //       title: '에스프레소 샷',
-  //       count: 1,
-  //       price: 600,
-  //     },
-  //     totalcount: {
-  //       count: 1,
-  //       price: this.$route.query.price,
-  //     },
-  //   };
-  // },
-  // computed: {
-  //   TotalPrice() {
-  //     const personaloptionPrice = this.personaloption.price * (this.personaloption.count - 1);
-  //     return (Number(this.totalcount.price) + personaloptionPrice) * this.totalcount.count;
-  //   },
-  // },
   methods: {
     back() {
       this.$router.go(-1);

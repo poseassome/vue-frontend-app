@@ -16,8 +16,10 @@
         </router-link>
       </li>
       <li>
-        <i class="fa-solid fa-gear"></i><br/>
-        설정
+        <router-link to="/setting">
+          <i class="fa-solid fa-gear"></i><br/>
+          설정
+        </router-link>
       </li>
     </ul>
   </div>
