@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     async fetchUsers(val) {
-      const { inputId, inputPw } = val;
+      const { inputId } = val;
       const info = await get();
       const { data } = info;
       if (inputId === data.username) {
