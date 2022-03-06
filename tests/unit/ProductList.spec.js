@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import ProductList from '@/views/ProductList.vue';
+import ProductItem from '@/components/ProductList/ProductItem.vue';
 
 describe('ProductList.vue', () => {
   test('제품 목록을 보여주는 화면이 존재한다.', () => {
@@ -21,12 +22,12 @@ describe('ProductList.vue', () => {
     expect(wrapper.find('[data-test="product-price"]').exists()).toBeTruthy();
   });
   test('신제품일 경우, 상품명 우측에 녹색 위첨자로 New가 화면에 존재한다.', async () => {
-    const wrapper = mount(ProductList);
+    const wrapper = mount(ProductItem);
     await wrapper.setData({ new: true });
     expect(wrapper.find('[data-test="NewProduct"]').text()).toBe('New');
   });
   test('인기제품일 경우, 상품명 우측에 빨간색 위첨자로 Hot가 화면에 존재한다.', async () => {
-    const wrapper = mount(ProductList);
+    const wrapper = mount(ProductItem);
     await wrapper.setData({ popular: true });
     expect(wrapper.find('[data-test="PopukarProduct"]').text()).toBe('Hot');
   });
