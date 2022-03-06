@@ -35,11 +35,9 @@ export default {
       type: Object,
       default() {
         return {
-          name: '',
-          price: -1,
-          description: '',
-          isBest: false,
-          imageUrl: '',
+          nameEng: '',
+          nameKr: '',
+          imgUrl: '',
         };
       },
     },
