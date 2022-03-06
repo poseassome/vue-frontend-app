@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import ShoppingCart from '@/components/ShoppingCart.vue';
+import ShoppingCart from '@/views/ShoppingCart.vue';
 
 describe('ShoppingCart.vue', () => {
   test('담은 제품을 보여주는 장바구니 화면이 존재한다.', () => {

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import ProductList from '@/components/ProductList.vue';
+import ProductList from '@/views/ProductList.vue';
 
 describe('ProductList.vue', () => {
   test('제품 목록을 보여주는 화면이 존재한다.', () => {
