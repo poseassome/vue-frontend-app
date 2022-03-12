@@ -27,8 +27,6 @@ export default {
       const product = await getProduct();
       const { data } = product;
       this.products = data.products;
-      console.log(data.products);
-      // this.$router.replace('productorder');
     },
   },
 };

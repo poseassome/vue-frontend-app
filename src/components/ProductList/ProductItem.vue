@@ -4,7 +4,7 @@
     <ul class="px-5">
       <li v-for="productmenu in products" :key="productmenu.id" class="my-2"
       data-test="product-item">
-        <router-link to="/productorder">
+        <router-link>
         <div class="grid grid-cols-3">
             <p class="rounded-full overflow-hidden w-24 h-24">
               <img v-bind:src="productmenu.imgUrl" alt='음료 이미지'

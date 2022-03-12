@@ -1,9 +1,20 @@
-import Client from '@/api/AxiosClient';
+import BaseClient from '@/api/BaseClient';
 
-const resource = '/product';
+export default class {
+  constructor(client = undefined) {
+    this.client = client || new BaseClient();
+  }
 
-export default {
-  getProduct() {
-    return Client.get(`${resource}`);
-  },
-};
+  async getProductList() {
+    const path = '/product';
+    const response = await this.client.instance.get(path);
+    return response.data;
+  }
+
+  async getProductInfo(productNo) {
+    const path = `/product/${productNo}`;
+    const response = await this.client.instance.get(path);
+
+    return response.data;
+  }
+}

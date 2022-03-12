@@ -1,5 +1,6 @@
 <template>
   <div id='Product-order-detail' class="container mx-auto mt-5 relative px-5">
+  <!--
     <ProductDetail :product="product">
       <template v-slot:eachprice>
         {{ comma(product.price) }}
@@ -25,85 +26,90 @@
         </template>
       </ProductFooter>
     </form>
-
+  -->
   </div>
 </template>
+
 <script>
-import ProductDetail from '@/components/Product/ProductDetail.vue';
-import ProductTemp from '@/components/Product/ProductTemp.vue';
-import ProductSize from '@/components/Product/ProductSize.vue';
-import ProductCup from '@/components/Product/ProductCup.vue';
-import ProductOptions from '@/components/Product/ProductOptions.vue';
-import ProductFooter from '@/components/Product/ProductFooter.vue';
+// import ProductDetail from '@/components/Product/ProductDetail.vue';
+// import ProductTemp from '@/components/Product/ProductTemp.vue';
+// import ProductSize from '@/components/Product/ProductSize.vue';
+// import ProductCup from '@/components/Product/ProductCup.vue';
+// import ProductOptions from '@/components/Product/ProductOptions.vue';
+// import ProductFooter from '@/components/Product/ProductFooter.vue';
 
 export default {
   name: 'ProductOrder',
   components: {
-    ProductDetail,
-    ProductTemp,
-    ProductSize,
-    ProductCup,
-    ProductOptions,
-    ProductFooter,
+    // ProductDetail,
+    // ProductTemp,
+    // ProductSize,
+    // ProductCup,
+    // ProductOptions,
+    // ProductFooter,
   },
   data() {
     return {
-      product: {
-        productNo: 1,
-        name: '카페 라떼',
-        description:
-          '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-        isBest: true,
-        imageUrl: 'https://projectlion-vue.s3.ap-northeast-2.amazonaws.com/items/cappuccino.jpg',
-        price: 5000,
-      },
-      cupSize: [
-        {
-          name: 'Short',
-          icon: 'text-sm',
-        },
-        {
-          name: 'Tall',
-          icon: 'text-md',
-        },
-        {
-          name: 'Grande',
-          icon: 'text-lg',
-        },
-        {
-          name: 'Venti',
-          icon: 'text-xl',
-        },
-      ],
-      options: [
-        {
-          optionNo: 1,
-          name: '에스프레소 샷',
-          unitPrice: 500,
-          baseQuantity: 1,
-        },
-        {
-          optionNo: 2,
-          name: '시럽',
-          unitPrice: 300,
-          baseQuantity: 0,
-        },
-      ],
-      order: {
-        quantity: 1,
-        cup: '',
-        options: [
-          {
-            optionNo: 1,
-            quantity: 1,
-          },
-          {
-            optionNo: 2,
-            quantity: 0,
-          },
-        ],
-      },
+      // product: {
+      //   productNo: 1,
+      //   name: '카페 라떼',
+      //   description:
+      //     '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
+      //   isBest: true,
+      //   imageUrl: 'https://projectlion-vue.s3.ap-northeast-2.amazonaws.com/items/cappuccino.jpg',
+      //   price: 5000,
+      // },
+      // cupSize: [
+      //   {
+      //     name: 'Short',
+      //     icon: 'text-sm',
+      //   },
+      //   {
+      //     name: 'Tall',
+      //     icon: 'text-md',
+      //   },
+      //   {
+      //     name: 'Grande',
+      //     icon: 'text-lg',
+      //   },
+      //   {
+      //     name: 'Venti',
+      //     icon: 'text-xl',
+      //   },
+      // ],
+      // options: [
+      //   {
+      //     optionNo: 1,
+      //     name: '에스프레소 샷',
+      //     unitPrice: 500,
+      //     baseQuantity: 1,
+      //   },
+      //   {
+      //     optionNo: 2,
+      //     name: '시럽',
+      //     unitPrice: 300,
+      //     baseQuantity: 0,
+      //   },
+      // ],
+      // order: {
+      //   quantity: 1,
+      //   cup: '',
+      //   options: [
+      //     {
+      //       optionNo: 1,
+      //       quantity: 1,
+      //     },
+      //     {
+      //       optionNo: 2,
+      //       quantity: 0,
+      //     },
+      //   ],
+      // },
     };
+  },
+  created() {
+    console.log(this.$route.params.productNo);
+    // this.getItem();
   },
   methods: {
     comma(val) {
