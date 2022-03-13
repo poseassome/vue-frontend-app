@@ -3,8 +3,10 @@
     <p class="text-xl font-bold">
       <slot name="AllProductPrice"></slot>원
     </p>
-    <button
-    class="block w-full font-bold py-2 px-4 rounded text-white bg-sky-700 my-2">주문하기</button>
+    <router-link to="/shoppingcart">
+      <button
+      class="block w-full font-bold py-2 px-4 rounded text-white bg-sky-700 my-2">주문하기</button>
+    </router-link>
   </div>
 </template>
 <script>

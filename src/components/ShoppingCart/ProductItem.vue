@@ -6,14 +6,14 @@
     </button>
     <div class="w-full flex justify-between text-left items-center">
       <p class="rounded-full overflow-hidden w-24 h-24">
-        <img v-bind:src="productmenu.thumbnail" alt='음료 이미지'
+        <img v-bind:src="productmenu.product.imgUrl" alt='음료 이미지'
         class="h-full" data-test="product-img">
       </p>
       <div class="w-4/6">
-        <p class="font-bold">{{ productmenu.name }}</p>
-        <p class="text-sm">{{ productmenu.nameEn }}</p>
+        <p class="font-bold">{{ productmenu.product.nameKr }}</p>
+        <p class="text-sm">{{ productmenu.product.nameEng }}</p>
         <p class="text-xs text-neutral-500"><span>{{ productmenu.temp }} | </span>
-          <span>{{ productmenu.size }} | </span>
+          <span>{{ productmenu.cupSize.name }} | </span>
           <span>{{ productmenu.cuptype }}</span></p>
         <p class="text-xs text-neutral-500">퍼스널 옵션 : {{ productmenu.personaloption }}</p>
         <div class="flex justify-between">
@@ -45,13 +45,19 @@ export default {
       type: Object,
       default() {
         return {
-          thumbnail: '',
-          name: '',
-          nameEn: '',
-          temp: '',
-          size: '',
-          cuptype: '',
-          personaloption: '',
+          quantity: -1,
+          cupSize: {
+            name: '',
+          },
+          options: [],
+          product: {
+            productNo: -1,
+            nameKr: '테스트 커피',
+            nameEng: '',
+            imgUrl: '',
+            price: -1,
+          },
+          optionsInfo: [],
         };
       },
     },
