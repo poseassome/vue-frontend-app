@@ -13,16 +13,15 @@
           class="userinput">
         </label>
       </p>
-      <button type='button' class="btn mb-2" @click='userlogin'>LOGIN</button>
+      <button type='button' class="btn mb-2" @click='userlogin()'>LOGIN</button>
     </form>
   </div>
 </template>
 
 <script>
-import UserApi from '@/api/Repositories/UserRepository';
-
 export default {
   name: 'UserLogin',
+  emits: ['login'],
   data() {
     return {
       inputId: '',
@@ -30,15 +29,11 @@ export default {
     };
   },
   methods: {
-    async userlogin() {
-      const userApi = new UserApi(this.apiClient);
-      const response = await userApi.login(this.inputId, this.inputPw);
-      if (response) {
-        await this.$router.push('/products');
-      } else {
-        // eslint-disable-next-line no-alert
-        alert('아이디와 비밀번호를 확인해주세요.');
-      }
+    userlogin() {
+      this.$emit('login', {
+        inputId: this.inputId,
+        inputPw: this.inputPw,
+      });
     },
   },
 };

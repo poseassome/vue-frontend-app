@@ -1,13 +1,13 @@
 <template>
   <div>
-    <UserLogin @login='fetchUsers' />
+    <UserLogin @login='userlogin' />
   </div>
 </template>
 <script>
 import UserLogin from '@/components/UserLogin.vue';
 import RepositoryFactory from '@/api/RepositoryFactory';
 
-const { get } = RepositoryFactory.get('user');
+const UserApi = RepositoryFactory.get('user');
 
 export default {
   name: 'HomeLogin',
@@ -15,12 +15,16 @@ export default {
     UserLogin,
   },
   methods: {
-    async fetchUsers(val) {
-      const { inputId } = val;
-      const info = await get();
-      const { data } = info;
-      if (inputId === data.username) {
-        this.$router.replace('products');
+    async userlogin(val) {
+      const { inputId, inputPw } = val;
+      console.log(val);
+      const userApi = new UserApi(this.apiClient);
+      const response = await userApi.login(inputId, inputPw);
+      if (response) {
+        await this.$router.push('/products');
+      } else {
+        // eslint-disable-next-line no-alert
+        alert('아이디와 비밀번호를 확인해주세요.');
       }
     },
   },
