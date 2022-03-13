@@ -1,23 +1,23 @@
 <template>
   <div id='Product-order-detail' class="container mx-auto mt-5 relative px-5">
-  <!--
     <ProductDetail :product="product">
       <template v-slot:eachprice>
         {{ comma(product.price) }}
       </template>
     </ProductDetail>
     <form>
-      <ProductTemp />
-      <ProductSize :cupSize="cupSize" />
-      <ProductCup  />
+      <ProductTemp :selected-temperature="order.temperature" @temperature="changeTemperature" />
+      <ProductSize :cupSize="product.cupSizes" :selected-cup-size="order.cupSize"
+      @cup-size="changeCupSize" />
+      <ProductCup :selected-cup-type="order.cupType" @cup-type="changeCupType" />
       <h2 class="optionbtn">퍼스널 옵션</h2>
       <ProductOptions :personalOption="option" @option="changeOption"
-      v-for="option in options" :key="option.optionNo">
+      v-for="option in product.options" :key="option.optionNo">
         <template v-slot:optionQuantity>
           {{ optionQuantity(option.optionNo) }}
         </template>
       </ProductOptions>
-      <ProductFooter @quantity="changeQuantity">
+      <ProductFooter @quantity="changeQuantity" @cart="addCart" @order="orderInstantly">
         <template v-slot:totalCount>
           {{ order.quantity }}
         </template>
@@ -26,110 +26,115 @@
         </template>
       </ProductFooter>
     </form>
-  -->
   </div>
 </template>
 
 <script>
-// import ProductDetail from '@/components/Product/ProductDetail.vue';
-// import ProductTemp from '@/components/Product/ProductTemp.vue';
-// import ProductSize from '@/components/Product/ProductSize.vue';
-// import ProductCup from '@/components/Product/ProductCup.vue';
-// import ProductOptions from '@/components/Product/ProductOptions.vue';
-// import ProductFooter from '@/components/Product/ProductFooter.vue';
+import ProductDetail from '@/components/Product/ProductDetail.vue';
+import ProductTemp from '@/components/Product/ProductTemp.vue';
+import ProductSize from '@/components/Product/ProductSize.vue';
+import ProductCup from '@/components/Product/ProductCup.vue';
+import ProductOptions from '@/components/Product/ProductOptions.vue';
+import ProductFooter from '@/components/Product/ProductFooter.vue';
+
+import ProductApi from '@/api/Repositories/ProductListRepository';
+import CartApi from '@/api/Repositories/ShoppingCartRepository';
 
 export default {
   name: 'ProductOrder',
   components: {
-    // ProductDetail,
-    // ProductTemp,
-    // ProductSize,
-    // ProductCup,
-    // ProductOptions,
-    // ProductFooter,
+    ProductDetail,
+    ProductTemp,
+    ProductSize,
+    ProductCup,
+    ProductOptions,
+    ProductFooter,
   },
   data() {
     return {
-      // product: {
-      //   productNo: 1,
-      //   name: '카페 라떼',
-      //   description:
-      //     '풍부하고 진한 에스프레소가 신선한 스팀 밀크를 만나 부드러워진 커피 위에 우유 거품을 살짝 얹은 대표적인 카페 라떼',
-      //   isBest: true,
-      //   imageUrl: 'https://projectlion-vue.s3.ap-northeast-2.amazonaws.com/items/cappuccino.jpg',
-      //   price: 5000,
-      // },
-      // cupSize: [
-      //   {
-      //     name: 'Short',
-      //     icon: 'text-sm',
-      //   },
-      //   {
-      //     name: 'Tall',
-      //     icon: 'text-md',
-      //   },
-      //   {
-      //     name: 'Grande',
-      //     icon: 'text-lg',
-      //   },
-      //   {
-      //     name: 'Venti',
-      //     icon: 'text-xl',
-      //   },
-      // ],
-      // options: [
-      //   {
-      //     optionNo: 1,
-      //     name: '에스프레소 샷',
-      //     unitPrice: 500,
-      //     baseQuantity: 1,
-      //   },
-      //   {
-      //     optionNo: 2,
-      //     name: '시럽',
-      //     unitPrice: 300,
-      //     baseQuantity: 0,
-      //   },
-      // ],
-      // order: {
-      //   quantity: 1,
-      //   cup: '',
-      //   options: [
-      //     {
-      //       optionNo: 1,
-      //       quantity: 1,
-      //     },
-      //     {
-      //       optionNo: 2,
-      //       quantity: 0,
-      //     },
-      //   ],
-      // },
+      product: {
+        productNo: -1,
+        nameKr: '',
+        description: '',
+        isBest: false,
+        imageUrl: '',
+        price: -1,
+        category: 1,
+        options: [],
+        cupSizes: [],
+      },
+      order: {
+        quantity: 1,
+        cupSize: 1,
+        cupType: 'MALL',
+        temperature: 'HOT',
+        options: [],
+      },
     };
   },
-  created() {
-    console.log(this.$route.params.productNo);
-    // this.getItem();
+  async created() {
+    await this.getProductInfo();
   },
   methods: {
     comma(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     },
+    async getProductInfo() {
+      const { productNo } = this.$route.params;
+      const productApi = new ProductApi(this.apiClient);
+      const response = await productApi.getProductInfo(productNo);
+      this.product = response.product;
+      this.backFillOrderOptions();
+    },
+    async addCart() {
+      let orderInfo = this.order;
+      const cartApi = new CartApi(this.apiClient);
+      orderInfo = Object.assign(orderInfo, { productNo: this.product.productNo });
+
+      await cartApi.addCart(orderInfo);
+      // eslint-disable-next-line no-alert
+      alert('장바구니에 담겼습니다');
+      await this.$router.push('/products');
+    },
+    backFillOrderOptions() {
+      const optionsLength = this.product.options.length;
+      for (let i = 0; i < optionsLength; i += 1) {
+        const currentOption = this.product.options[i];
+        this.order.options.push({
+          optionNo: currentOption.optionNo,
+          quantity: currentOption.baseQuantity,
+        });
+      }
+      this.order.cupSize = this.product.cupSizes[0].optionId;
+    },
+    changeTemperature(temperature) {
+      this.order.temperature = temperature;
+    },
+    changeCupSize(size) {
+      this.order.cupSize = size;
+    },
+    changeCupType(type) {
+      this.order.cupType = type;
+    },
     optionQuantity(optionNo) {
       return this.order.options.find((option) => option.optionNo === optionNo).quantity;
     },
-    isOptionChangeable(optionIndex, num) {
-      const currentQuantity = this.order.options[optionIndex].quantity;
-      const { baseQuantity } = this.options[optionIndex];
-      return num > 0 || (num < 0 && currentQuantity > baseQuantity);
+    isOptionChangeable(orderOptionIndex, productOptionIndex, increment) {
+      const currentQuantity = this.order.options[orderOptionIndex].quantity;
+      const { baseQuantity } = this.product.options[productOptionIndex];
+      return increment > 0 || (increment < 0 && currentQuantity > baseQuantity);
     },
     changeOption(val) {
-      const { optionNo, num } = val;
-      const optionIndex = this.order.options.findIndex(
+      const { optionNo, delta } = val;
+      console.log(val);
+      const orderOptionIndex = this.order.options.findIndex(
         (option) => option.optionNo === optionNo,
       );
-      if (this.isOptionChangeable(optionIndex, num)) {
-        this.order.options[optionIndex].quantity += num;
+      const productOptionIndex = this.product.options.findIndex(
+        (option) => option.optionNo === optionNo,
+      );
+      if (this.isOptionChangeable(orderOptionIndex, productOptionIndex, delta)) {
+        this.order.options[orderOptionIndex].quantity += delta;
       }
     },
     isQuantityChangeable(num) {
@@ -147,12 +152,12 @@ export default {
   computed: {
     optionPrice() {
       let totalOptionPrice = 0;
-      for (let i = 0; i < this.options.length; i += 1) {
-        const currentOption = this.options[i];
+      for (let i = 0; i < this.product.options.length; i += 1) {
+        const currentOption = this.product.options[i];
         const currentOrder = this.findOptionInOrder(currentOption.optionNo);
         if (currentOrder !== undefined) {
           totalOptionPrice
-            += (currentOrder.quantity - currentOption.baseQuantity) * currentOption.unitPrice;
+            += (currentOrder.quantity - currentOption.baseQuantity) * currentOption.unitprice;
         }
       }
       return totalOptionPrice;

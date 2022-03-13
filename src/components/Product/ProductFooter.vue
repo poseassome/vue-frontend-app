@@ -18,21 +18,29 @@
       </p>
     </div>
     <button type="button"
-    class="font-bold py-2 px-4 rounded text-sky-700 border border-sky-700 mt-10 mr-5">담기</button>
+    class="font-bold py-2 px-4 rounded text-sky-700 border border-sky-700 mt-10 mr-5"
+    @click="addCart">담기</button>
     <button type="button"
-    class="font-bold py-2 px-4 rounded text-white bg-sky-700 mt-10">주문하기</button>
+    class="font-bold py-2 px-4 rounded text-white bg-sky-700 mt-10"
+    @click="orderInstantly">주문하기</button>
   </div>
 </template>
 <script>
 export default {
   name: 'ProductFooter',
-  emits: ['quantity'],
+  emits: ['quantity', 'order', 'cart'],
   methods: {
     minusCount() {
       this.$emit('quantity', -1);
     },
     plusCount() {
       this.$emit('quantity', 1);
+    },
+    addCart() {
+      this.$emit('cart');
+    },
+    orderInstantly() {
+      this.$emit('order');
     },
   },
 };

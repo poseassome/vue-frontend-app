@@ -25,8 +25,9 @@ export default {
       type: Object,
       default() {
         return {
-          optionNo: '',
+          optionNo: -1,
           name: '',
+          unitPrice: -1,
         };
       },
     },
@@ -35,13 +36,13 @@ export default {
     minusOption(optionNo) {
       this.$emit('option', {
         optionNo,
-        num: -1,
+        delta: -1,
       });
     },
     plusOption(optionNo) {
       this.$emit('option', {
         optionNo,
-        num: 1,
+        delta: 1,
       });
     },
   },
