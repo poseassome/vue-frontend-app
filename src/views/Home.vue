@@ -17,7 +17,6 @@ export default {
   methods: {
     async userlogin(val) {
       const { inputId, inputPw } = val;
-      console.log(val);
       const userApi = new UserApi(this.apiClient);
       const response = await userApi.login(inputId, inputPw);
       if (response) {
