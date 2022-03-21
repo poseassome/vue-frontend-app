@@ -126,7 +126,6 @@ export default {
     },
     changeOption(val) {
       const { optionNo, delta } = val;
-      console.log(val);
       const orderOptionIndex = this.order.options.findIndex(
         (option) => option.optionNo === optionNo,
       );
