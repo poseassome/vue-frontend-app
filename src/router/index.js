@@ -3,6 +3,7 @@ import Home from '@/views/Home.vue';
 import ProductOrder from '@/views/ProductOrder.vue';
 import ProductList from '@/views/ProductList.vue';
 import ShoppingCart from '@/views/ShoppingCart.vue';
+import OrderView from '@/views/Order.vue';
 import AppSetting from '@/views/AppSetting.vue';
 
 const routes = [
@@ -25,6 +26,11 @@ const routes = [
     path: '/shoppingcart',
     name: 'ShoppingCart',
     component: ShoppingCart,
+  },
+  {
+    path: '/order',
+    name: 'OrderView',
+    component: OrderView,
   },
   {
     path: '/setting',
