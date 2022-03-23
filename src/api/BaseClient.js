@@ -3,7 +3,8 @@ import axios from 'axios';
 const baseUrl = 'https://taling.projectlion.lkaybob.pe.kr/api';
 
 class BaseClient {
-  #ACCESS_TOKEN = '';
+  // #ACCESS_TOKEN = '';
+  #STORE = undefined;
 
   #CLIENT_ID = 'web-app';
 
@@ -11,7 +12,8 @@ class BaseClient {
 
   #instance = undefined;
 
-  constructor() {
+  constructor(store) {
+    this.#STORE = store;
     this.#instance = axios.create({
       baseURL: baseUrl,
     });
@@ -23,12 +25,15 @@ class BaseClient {
   }
 
   get instance() {
-    this.#instance.defaults.headers.authorization = this.#ACCESS_TOKEN !== '' ? `Bearer ${this.#ACCESS_TOKEN}` : `Basic ${this.getBasicAuth()}`;
+    // this.#instance.defaults.headers.authorization = this.#ACCESS_TOKEN !==
+    // '' ? `Bearer ${this.#ACCESS_TOKEN}` : `Basic ${this.getBasicAuth()}`;
+    this.#instance.defaults.headers.authorization = this.#STORE.state.auth.accessToken !== '' ? `Bearer ${this.#STORE.state.auth.accessToken}` : `Basic ${this.getBasicAuth()}`;
     return this.#instance;
   }
 
   set ACCESS_TOKEN(accessToken) {
-    this.#ACCESS_TOKEN = accessToken;
+    // this.#ACCESS_TOKEN = accessToken;
+    this.#STORE.dispatch('auth/setAccessToken', accessToken);
   }
 }
 

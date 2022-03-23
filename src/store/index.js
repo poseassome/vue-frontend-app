@@ -1,15 +1,10 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import { createStore } from 'vuex';
+import cartModule from './shoppingcart';
+import authModule from './auth';
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
-  state: {
-    username: '',
-  },
-  mutations: {
-    setUsername(state, username) {
-      state.username = username;
-    },
+export default createStore({
+  modules: {
+    cart: cartModule,
+    auth: authModule,
   },
 });
