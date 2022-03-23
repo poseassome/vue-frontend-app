@@ -38,7 +38,10 @@ import ProductOptions from '@/components/Product/ProductOptions.vue';
 import ProductFooter from '@/components/Product/ProductFooter.vue';
 
 import ProductApi from '@/api/Repositories/ProductListRepository';
-import CartApi from '@/api/Repositories/ShoppingCartRepository';
+// import CartApi from '@/api/Repositories/ShoppingCartRepository';
+import { createNamespacedHelpers } from 'vuex';
+
+const { mapActions } = createNamespacedHelpers('cart');
 
 export default {
   name: 'ProductOrder',
@@ -76,6 +79,7 @@ export default {
     await this.getProductInfo();
   },
   methods: {
+    ...mapActions(['addCartItem']),
     comma(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     },
@@ -88,10 +92,11 @@ export default {
     },
     async addCart() {
       let orderInfo = this.order;
-      const cartApi = new CartApi(this.apiClient);
+      // const cartApi = new CartApi(this.apiClient);
       orderInfo = Object.assign(orderInfo, { productNo: this.product.productNo });
 
-      await cartApi.addCart(orderInfo);
+      // await cartApi.addCart(orderInfo);
+      await this.addCartItem(orderInfo, this.apiClient);
       // eslint-disable-next-line no-alert
       alert('장바구니에 담겼습니다');
       await this.$router.push('/products');

@@ -49,6 +49,11 @@ export default {
       return `${this.getTotalPrice.toLocaleString()}원을 결제합니다.`;
     },
   },
+  methods: {
+    back() {
+      this.$router.go(-1);
+    },
+  },
 };
 </script>
 
