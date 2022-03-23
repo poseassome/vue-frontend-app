@@ -27,7 +27,13 @@ import CartHeader from '@/components/ShoppingCart/CartHeader.vue';
 import ProductItem from '@/components/ShoppingCart/ProductItem.vue';
 import CartFooter from '@/components/ShoppingCart/CartFooter.vue';
 
-import CartApi from '@/api/Repositories/ShoppingCartRepository';
+// import CartApi from '@/api/Repositories/ShoppingCartRepository';
+import { createNamespacedHelpers } from 'vuex';
+
+const {
+  mapState,
+  mapActions,
+} = createNamespacedHelpers('cart');
 
 export default {
   name: 'ShoppingCart',
@@ -36,30 +42,38 @@ export default {
     ProductItem,
     CartFooter,
   },
-  data() {
-    return {
-      cart: [],
-    };
-  },
+  // data() {
+  //   return {
+  //     cart: [],
+  //   };
+  // },
   created() {
-    this.CartList();
+    // this.CartList();
+    if (this.isInitialized === false) {
+      this.initCartItem(this.apiClient);
+    }
   },
   methods: {
     comma(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     },
+    /*
     async CartList() {
       const cartApi = new CartApi(this.apiClient);
       const response = await cartApi.getCartList();
       this.cart = response.cart;
     },
-    // deleteList(index) {
-    // response.cart.splice(index, 1);
-    // this.cart = response;
-    // const listNo = this.productmenus.find((product) => product.listNo === index);
-    // const idx = this.cart.indexOf(index);
-    // this.cart.splice(index, 1);
-    // },
+    */
+    ...mapActions(['initCartItem']),
+    /*
+    deleteList(index) {
+    response.cart.splice(index, 1);
+    this.cart = response;
+    const listNo = this.productmenus.find((product) => product.listNo === index);
+    const idx = this.cart.indexOf(index);
+    this.cart.splice(index, 1);
+    },
+    */
     async changeItemCount(val) {
       const { idx, num } = val;
       if ((num < 0 && this.cart[idx].quantity > 1)
@@ -80,6 +94,8 @@ export default {
     },
   },
   computed: {
+    ...mapState({ cart: (state) => state.cart }),
+    ...mapState(['isInitialized']),
     AllProductPrice() {
       const items = this.cart;
       let total = 0;
