@@ -1,11 +1,9 @@
 <template>
   <div data-test="cart-item">
-  <!--
     <button type="button" class="absolute right-2"
     @click="deleteList(idx)" data-test="deleteProduct">
       <i class="fa-solid fa-circle-xmark"></i>
     </button>
-    -->
     <div class="w-full flex justify-between text-left items-center">
       <p class="rounded-full overflow-hidden w-24 h-24">
         <img v-bind:src="productmenu.product.imgUrl" alt='음료 이미지'

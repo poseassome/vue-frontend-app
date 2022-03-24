@@ -65,15 +65,14 @@ export default {
     },
     */
     ...mapActions(['initCartItem']),
-    /*
+
     deleteList(index) {
-    response.cart.splice(index, 1);
-    this.cart = response;
-    const listNo = this.productmenus.find((product) => product.listNo === index);
-    const idx = this.cart.indexOf(index);
-    this.cart.splice(index, 1);
+      // response.cart.splice(index, 1);
+      // this.cart = response;
+      // const listNo = this.productmenus.find((product) => product.listNo === index);
+      // const idx = this.cart.indexOf(index);
+      this.cart.splice(index, 1);
     },
-    */
     async changeItemCount(val) {
       const { idx, num } = val;
       if ((num < 0 && this.cart[idx].quantity > 1)
